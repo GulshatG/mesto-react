@@ -12,7 +12,7 @@ export default function Card(props) {
         className="elements__picture"
         onClick={handleClick}
         src={props.card.link}
-        alt="Картинка"
+        alt={props.card.name}
       />
       <div className="elements__group">
         <h3 className="elements__name">{props.card.name}</h3>

@@ -23,60 +23,54 @@ export default function Main(props) {
         setCards([...cardsRes]);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return (
-    <>
-      <main className="main">
-        <section className="profile">
-          <div className="profile__person">
-            <div className="profile__avatar-group">
-              <img
-                className="profile__avatar"
-                src={`${userAvatar}`}
-                alt="Жак-Ив Кусто"
-              />
-              <button
-                className="profile__avatar-edit"
-                onClick={props.onEditAvatar}
-              ></button>
-            </div>
-            <div className="profile__info">
-              <div className="profile__text">
-                <h1 className="profile__name">{userName}</h1>
-                <p className="profile__feature">{userDescription}</p>
-              </div>
-              <button
-                className="profile__button-edit"
-                onClick={props.onEditProfile}
-                type="button"
-              >
-                <img
-                  className="profile__icon-edit"
-                  src={editButton}
-                  alt="Кнопка редактирования"
-                />
-              </button>
-            </div>
-          </div>
-          <button
-            className="profile__button-add"
-            onClick={props.onAddPlace}
-            type="button"
-          >
+    <main className="main">
+      <section className="profile">
+        <div className="profile__person">
+          <div className="profile__avatar-group">
             <img
-              className="profile__button-icon"
-              src={addButton}
-              alt="Кнопка"
+              className="profile__avatar"
+              src={`${userAvatar}`}
+              alt="Жак-Ив Кусто"
             />
-          </button>
-        </section>
-        <section className="elements">
-          {cards.map((card) => (
-            <Card key={card._id} card={card} onCardClick={props.onCardClick} />
-          ))}
-        </section>
-      </main>
-    </>
+            <button
+              className="profile__avatar-edit"
+              onClick={props.onEditAvatar}
+            ></button>
+          </div>
+          <div className="profile__info">
+            <div className="profile__text">
+              <h1 className="profile__name">{userName}</h1>
+              <p className="profile__feature">{userDescription}</p>
+            </div>
+            <button
+              className="profile__button-edit"
+              onClick={props.onEditProfile}
+              type="button"
+            >
+              <img
+                className="profile__icon-edit"
+                src={editButton}
+                alt="Кнопка редактирования"
+              />
+            </button>
+          </div>
+        </div>
+        <button
+          className="profile__button-add"
+          onClick={props.onAddPlace}
+          type="button"
+        >
+          <img className="profile__button-icon" src={addButton} alt="Кнопка" />
+        </button>
+      </section>
+      <section className="elements">
+        {cards.map((card) => (
+          <Card key={card._id} card={card} onCardClick={props.onCardClick} />
+        ))}
+      </section>
+    </main>
   );
 }

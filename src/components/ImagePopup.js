@@ -19,7 +19,7 @@ export default function ImagePopup(props) {
           <img
             className="popup__big-image"
             src={props.card.link}
-            alt="Картинка"
+            alt={props.card.name}
           />
           <h3 className="popup__big-img-title">{props.card.name}</h3>
         </div>
