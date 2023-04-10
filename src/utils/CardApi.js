@@ -44,7 +44,6 @@ class CardApi extends Api {
       },
     }).then(this._checkResponse);
   }
-
 }
 
 const cardApi = new CardApi({

@@ -4,7 +4,7 @@ import addButton from "../images/Add-Button.svg";
 import React from "react";
 import UserApi from "../utils/UserApi";
 import CardApi from "../utils/CardApi";
-import Card from './Card';
+import Card from "./Card";
 
 export default function Main(props) {
   const [userName, setUserName] = React.useState("Жак-Ив Кусто");
@@ -73,7 +73,7 @@ export default function Main(props) {
         </section>
         <section className="elements">
           {cards.map((card) => (
-            <Card key={card._id} card={card} onCardClick={props.onCardClick}/>
+            <Card key={card._id} card={card} onCardClick={props.onCardClick} />
           ))}
         </section>
       </main>
