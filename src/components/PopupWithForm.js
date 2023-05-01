@@ -16,7 +16,11 @@ export default function PopupWithForm(props) {
           >
             <img className="popup__image-close" src={closeIcon} alt="Закрыть" />
           </button>
-          <form className="popup__form popup__form_profile" name={props.name}>
+          <form
+            className="popup__form popup__form_profile"
+            name={props.name}
+            onSubmit={props.onSubmit}
+          >
             <h2 className="popup__title">{props.title}</h2>
             {props.children}
             <button className="popup__button" type="submit">
