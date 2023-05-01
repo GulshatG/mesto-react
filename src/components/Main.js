@@ -1,29 +1,12 @@
-import defaultAvatar from "../images/Жак-Ив-Кусто.png";
 import editButton from "../images/Edit-Button.svg";
 import addButton from "../images/Add-Button.svg";
 import React from "react";
-import UserApi from "../utils/UserApi";
-import CardApi from "../utils/CardApi";
 import Card from "./Card";
+import { CurrentUserContext } from "../context/CurrentUserContext";
+import { CardContext } from "../context/CardContext";
 
 export default function Main(props) {
-  const [userName, setUserName] = React.useState("Жак-Ив Кусто");
-  const [userDescription, setUserDescription] = React.useState(
-    "Исследователь океана"
-  );
-  const [cards, setCards] = React.useState([]);
-  const [userAvatar, setUserAvatar] = React.useState(defaultAvatar);
-  React.useEffect(() => {
-    Promise.all([UserApi.getUserInfo(), CardApi.getCards()])
-      .then(([userRes, cardsRes]) => {
-        setUserName(userRes.name);
-        setUserDescription(userRes.about);
-        setUserAvatar(userRes.avatar);
-
-        setCards([...cardsRes]);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <main className="main">
@@ -32,7 +15,7 @@ export default function Main(props) {
           <div className="profile__avatar-group">
             <img
               className="profile__avatar"
-              src={`${userAvatar}`}
+              src={`${currentUser.avatar}`}
               alt="Жак-Ив Кусто"
             />
             <button
@@ -42,8 +25,8 @@ export default function Main(props) {
           </div>
           <div className="profile__info">
             <div className="profile__text">
-              <h1 className="profile__name">{userName}</h1>
-              <p className="profile__feature">{userDescription}</p>
+              <h1 className="profile__name">{currentUser.name}</h1>
+              <p className="profile__feature">{currentUser.about}</p>
             </div>
             <button
               className="profile__button-edit"
@@ -67,8 +50,15 @@ export default function Main(props) {
         </button>
       </section>
       <section className="elements">
-        {cards.map((card) => (
-          <Card key={card._id} card={card} onCardClick={props.onCardClick} />
+        {props.cards.map((card) => (
+          <CardContext.Provider value={card}>
+            <Card
+              key={card._id}
+              onCardClick={props.onCardClick}
+              onCardLike={props.onCardLike}
+              onCardDelete={props.onCardDelete}
+            />
+          </CardContext.Provider>
         ))}
       </section>
     </main>
