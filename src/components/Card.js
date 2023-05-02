@@ -1,24 +1,22 @@
 import trash from "../images/Trash.svg";
 import React from "react";
-import { CardContext } from "../context/CardContext";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 
 export default function Card(props) {
-  const card = React.useContext(CardContext);
   const currentUser = React.useContext(CurrentUserContext);
-  const isOwn = card.owner._id === currentUser._id;
-  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const isOwn = props.card.owner._id === currentUser._id;
+  const isLiked = props.card.likes.some((i) => i._id === currentUser._id);
   const cardLikeButtonClassName = `elements__button-like ${
     isLiked && "elements__button-like_active"
   }`;
   function handleClick() {
-    props.onCardClick(card);
+    props.onCardClick(props.card);
   }
   function handleLikeClick() {
-    props.onCardLike(card);
+    props.onCardLike(props.card);
   }
   function handleDeleteClick() {
-    props.onCardDelete(card);
+    props.onCardDelete(props.card);
   }
   return (
     <div className="elements__element">
@@ -33,18 +31,18 @@ export default function Card(props) {
       <img
         className="elements__picture"
         onClick={handleClick}
-        src={card.link}
-        alt={card.name}
+        src={props.card.link}
+        alt={props.card.name}
       />
       <div className="elements__group">
-        <h3 className="elements__name">{card.name}</h3>
+        <h3 className="elements__name">{props.card.name}</h3>
         <div className="elements__like-group">
           <button
             className={cardLikeButtonClassName}
             onClick={handleLikeClick}
             type="button"
           ></button>
-          <p className="elements__like-count">{card.likes.length}</p>
+          <p className="elements__like-count">{props.card.likes.length}</p>
         </div>
       </div>
     </div>
