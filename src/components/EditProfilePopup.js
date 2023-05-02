@@ -18,7 +18,7 @@ export default function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser,props.isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -39,7 +39,7 @@ export default function EditProfilePopup(props) {
     >
       <input
         id="name-input"
-        value={name}
+        value={name || ''}
         onChange={handleNameChange}
         className="popup__input popup__input_field_name"
         type="text"
@@ -52,7 +52,7 @@ export default function EditProfilePopup(props) {
       <span className="name-input-error popup__input-error"></span>
       <input
         id="feature-input"
-        value={description}
+        value={description || ''}
         onChange={handleDescriptionChange}
         className="popup__input popup__input_field_feature"
         type="text"
