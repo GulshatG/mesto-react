@@ -6,6 +6,10 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 
 export default function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
+  React.useEffect(() => {
+    props.onHeaderLinkChange("Выход", "/logout");
+    return () => props.onHeaderLinkChange("", "");
+  });
 
   return (
     <main className="main">

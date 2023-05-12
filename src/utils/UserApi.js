@@ -26,6 +26,7 @@ class UserApi extends Api {
       }),
     }).then(this._checkResponse);
   }
+
   updateAvatar(link) {
     return fetch(this._url + "/avatar", {
       method: "PATCH",

@@ -3,10 +3,12 @@ import React from "react";
 
 export default function EditAvatarPopup(props) {
   const urlInput = React.useRef();
+
   function handleSubmit(e) {
     e.preventDefault();
     props.onUpdateAvatar(urlInput.current.value);
   }
+
   return (
     <PopupWithForm
       name="avatar"
